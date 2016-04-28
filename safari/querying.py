@@ -16,10 +16,15 @@ def run(command):
 
 
 if __name__ == '__main__':
-    c = children.select()
+    '''
+    1. get a particular document
+    2. get docs depending on particular condition
+    '''
+    c = children.select(children.c.name == 'Amit')
+    # c = children.select(children.c.age < 16)
     resp = run(c)
     if resp.get('response') == 'success':
         for i in resp['docs']:
             print i
     else:
-        print 'failed',resp['msg']
+        print 'failed', resp['msg']
