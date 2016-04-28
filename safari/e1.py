@@ -37,45 +37,37 @@ line_items = Table('line_items', metadata,
     Column('extended_cost', Numeric(12, 2))
 )
 
-engine = create_engine('sqlite:///:memory:')
-metadata.create_all(engine)
-ins = cookies.insert().values(
-    cookie_name="chocolate chip",
-    cookie_recipe_url="http://some.aweso.me/cookie/recipe.html",
-    cookie_sku="CC01",
-    quantity="12",
-    unit_cost="0.50"
-)
+
 if __name__ == '__main__':
-    s = select([cookies])
-    rp = engine.execute(s)
+    engine = create_engine('sqlite:///:memory:')
+    metadata.create_all(engine)
     ins = cookies.insert()
     inventory_list = [
-                      {
-                          'cookie_name': 'peanut butter',
-                          'cookie_recipe_url': 'http://some.aweso.me/cookie/peanut.html',
-                          'cookie_sku': 'PB01',
-                          'quantity': '24',
-                          'unit_cost': '0.25'
-                      },
-                      {
-                          'cookie_name': 'oatmeal raisin',
-                          'cookie_recipe_url': 'http://some.okay.me/cookie/raisin.html',
-                          'cookie_sku': 'EWW01',
-                          'quantity': '100',
-                          'unit_cost': '1.00'
-                      },
-                      {
-                        'cookie_name': 'peanut ',
-                        'cookie_recipe_url': 'http://some.aweso.me/cookie/butter.html',
-                        'cookie_sku': 'PB01',
-                        'quantity': '240',
-                        'unit_cost': '0.25'
-                      }
-                      ]
+        {
+            'cookie_name': 'peanut butter',
+            'cookie_recipe_url': 'http://some.aweso.me/cookie/peanut.html',
+            'cookie_sku': 'PB01',
+            'quantity': '24',
+            'unit_cost': '0.25'
+        },
+        {
+            'cookie_name': 'oatmeal raisin',
+            'cookie_recipe_url': 'http://some.okay.me/cookie/raisin.html',
+            'cookie_sku': 'EWW01',
+            'quantity': '100',
+            'unit_cost': '1.00'
+        },
+        {
+            'cookie_name': 'peanut ',
+            'cookie_recipe_url': 'http://some.aweso.me/cookie/butter.html',
+            'cookie_sku': 'PB01',
+            'quantity': '240',
+            'unit_cost': '0.25'
+        }
+    ]
     result = engine.execute(ins, inventory_list)
     s = select([cookies])
     s = s.order_by(cookies.c.quantity)
     rp = engine.execute(s)
     for i in rp:
-        print i.quantity, i.cookie_name
+        print i
