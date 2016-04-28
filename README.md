@@ -1,1 +1,2 @@
-# sql_alchemy
+# SQLAlchemy
+* Working with Data via SQLAlchemy Core
