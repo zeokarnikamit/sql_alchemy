@@ -4,6 +4,10 @@ from e2 import children
 
 
 def run(command):
+    """
+    @:param command --> command to excecute
+    :return {'response': 'failure/success', 'msg': if any exceptions happen, 'docs': documents from db}
+    """
     response = {'response': 'failure', 'msg': ''}
     try:
         ex = command.execute()
@@ -19,9 +23,11 @@ if __name__ == '__main__':
     '''
     1. get a particular document
     2. get docs depending on particular condition
+    3. get all docs from db
     '''
-    c = children.select(children.c.name == 'Amit')
+    # c = children.select(children.c.name == 'Amit')
     # c = children.select(children.c.age < 16)
+    c = children.select()
     resp = run(c)
     if resp.get('response') == 'success':
         for i in resp['docs']:

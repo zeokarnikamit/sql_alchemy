@@ -1,9 +1,14 @@
 # -*- coding: utf-8 -*-
 __author__ = "karnikamit"
-from e2 import imdb, children
+from e2 import children
 
 
 def insert_data(db, data):
+    """
+    @:param db --> db object where data has to be inserted
+    @:param data --> data to be inserted
+    :return {'response': 'success/failure', 'msg': if any exceptions occur}
+    """
     response = {'response': 'failure', 'msg': ''}
     try:
         cmd = db.insert()
@@ -17,8 +22,8 @@ def insert_data(db, data):
     return response
 
 if __name__ == '__main__':
-    data = [{'name': 'John', 'age': 15, 'marks': 35},
-            {'name': 'Susan', 'age': 14, 'marks': 90},
-            {'name': 'Carl', 'age': 15, 'marks': 78},
-            {'name': 'Amit', 'age': 18, 'marks': 92}]
-    print insert_data(children, data)
+    docs = [{'name': 'sathvik', 'age': 25, 'marks': 85},
+            {'name': 'yathiraj', 'age': 24, 'marks': 70},
+            {'name': 'vijay', 'age': 25, 'marks': 87},
+            {'name': 'nikhil', 'age': 25, 'marks': 82}]
+    print insert_data(children, docs)
